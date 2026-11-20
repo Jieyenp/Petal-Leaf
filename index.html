@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Petal &amp; Leaf — Custom Bouquets &amp; Flower Shop</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header>
+    <div class="nav-container">
+      <a href="#" class="brand">
+        <span class="brand-dot" aria-hidden="true"></span>
+        Petal &amp; Leaf
+      </a>
+
+      <nav aria-label="Primary navigation">
+        <ul id="navLinks">
+          <li><a href="#flowers">Flowers</a></li>
+          <li><a href="#builder">Custom Bouquet</a></li>
+          <li><a href="#care-notes">Bloom Notes</a></li>
+        </ul>
+      </nav>
+
+      <div class="header-actions">
+        <button type="button" class="btn btn-secondary btn-sm" id="accountBtn">Account</button>
+        <button type="button" class="btn btn-primary btn-sm" id="openCartBtn">
+          Cart (<span id="cartCount">0</span>)
+        </button>
+        <button
+          type="button"
+          class="menu-toggle"
+          id="menuToggle"
+          aria-label="Toggle navigation menu"
+          aria-expanded="false"
+        >
+          ☰
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="hero">
+      <div>
+        <span class="badge">Desktop &amp; Mobile Ready • Light Green &amp; Pink</span>
+        <h1>Fresh <span>blossoms</span> &amp; custom bouquets delivered.</h1>
+        <p>
+          Explore 16 flower varieties with full descriptions, build your own hand-tied bouquet for
+          delivery, sign in to save your details, and add single stems or custom arrangements to
+          your cart from any screen.
+        </p>
+        <div class="btn-group">
+          <a href="#builder" class="btn btn-primary">Build a Bouquet</a>
+          <a href="#flowers" class="btn btn-secondary">Browse 16 Flowers</a>
+          <button type="button" class="btn btn-secondary" id="shuffleAccentBtn">
+            Toggle Accent Mood
+          </button>
+        </div>
+      </div>
+
+      <aside class="hero-card">
+        <h2>Palette &amp; Delivery Mood</h2>
+        <p id="moodCaption">Fresh leaf green paired with soft blossom pink.</p>
+        <div class="swatches">
+          <div class="swatch swatch-mint">Leaf</div>
+          <div class="swatch swatch-rose">Petal</div>
+          <div class="swatch swatch-sage">Stem</div>
+        </div>
+        <p class="hero-note" id="accountBanner">
+          Guest mode — tap Account to log in or sign up for saved delivery details.
+        </p>
+      </aside>
+    </section>
+
+    <section id="flowers">
+      <div class="section-header">
+        <h2>Flower Catalog &amp; Descriptions</h2>
+        <div class="controls">
+          <input
+            type="search"
+            id="searchInput"
+            class="search-input"
+            placeholder="Search flowers or traits..."
+            aria-label="Search flowers"
+          />
+          <div class="filters" role="group" aria-label="Filter flowers">
+            <button type="button" class="filter-btn active" data-filter="all">All (16)</button>
+            <button type="button" class="filter-btn" data-filter="classic">Classic &amp; Spring</button>
+            <button type="button" class="filter-btn" data-filter="garden">Garden &amp; Tropical</button>
+          </div>
+        </div>
+      </div>
+      <div class="grid" id="flowersGrid"></div>
+    </section>
+
+    <section id="builder">
+      <div class="section-header">
+        <h2>Customizable Bouquet Builder</h2>
+        <span class="sub-pill">1:1 Stem Preview &amp; Delivery Ready</span>
+      </div>
+
+      <div class="builder-layout">
+        <div class="builder-panel">
+          <h3>1. Choose Stems (Tap + Add)</h3>
+          <div class="stem-picker-list" id="stemPickerList"></div>
+        </div>
+
+        <div class="builder-panel builder-summary">
+          <h3>2. Wrap, Note &amp; Delivery</h3>
+
+          <div class="form-row">
+            <label for="wrapSelect">Wrapping Style</label>
+            <select id="wrapSelect">
+              <option value="Blush Kraft &amp; Tissue|3.00">Blush Kraft &amp; Tissue (+$3.00)</option>
+              <option value="Sage Linen &amp; Wax Seal|5.00">Sage Linen &amp; Wax Seal (+$5.00)</option>
+              <option value="Clear Botanical Sleeve|2.00">Clear Botanical Sleeve (+$2.00)</option>
+            </select>
+          </div>
+
+          <div class="form-row">
+            <label for="ribbonSelect">Ribbon Accent</label>
+            <select id="ribbonSelect">
+              <option value="Soft Pink Satin">Soft Pink Satin</option>
+              <option value="Mint Grosgrain">Mint Grosgrain</option>
+              <option value="Cream Cotton Twine">Cream Cotton Twine</option>
+            </select>
+          </div>
+
+          <div class="form-row-grid">
+            <div class="form-row">
+              <label for="deliveryDate">Delivery Date</label>
+              <input type="date" id="deliveryDate" />
+            </div>
+
+            <div class="form-row">
+              <label for="deliveryAddress">Delivery Address</label>
+              <input
+                type="text"
+                id="deliveryAddress"
+                placeholder="Street, city, zip / landmark"
+              />
+            </div>
+          </div>
+
+          <div class="form-row">
+            <label for="giftNote">Gift Card Message (Optional)</label>
+            <textarea
+              id="giftNote"
+              rows="2"
+              placeholder="Write a sweet note for the recipient..."
+            ></textarea>
+          </div>
+
+          <div class="selected-stems-box">
+            <strong>Selected Stems:</strong>
+            <ul id="selectedStemsList" class="selected-stems-list">
+              <li class="muted-empty">No stems selected yet — add flowers from the list.</li>
+            </ul>
+          </div>
+
+          <div class="builder-total-bar">
+            <div>
+              <span>Bouquet Total:</span>
+              <strong id="builderTotal">$0.00</strong>
+            </div>
+            <button type="button" class="btn btn-primary" id="addCustomBouquetBtn">
+              Add Custom Bouquet to Cart
+            </button>
+          </div>
+          <div class="form-status" id="builderStatus" role="status" aria-live="polite"></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="care-notes">
+      <div class="notes-box">
+        <h2>Quick Floral Observation Notes</h2>
+        <p>
+          Notice how flower shapes vary—from layered roses, peonies, and camellias to open-faced
+          daisies, gerberas, and sunflowers, spiky lavender, clustered hydrangeas, and fragrant
+          jasmine.
+        </p>
+        <div class="mini-stats">
+          <div class="stat">
+            <strong>16 Flowers</strong>
+            <span>Detailed descriptions &amp; 1:1 photos</span>
+          </div>
+          <div class="stat">
+            <strong>Custom Delivery</strong>
+            <span>Build bouquets with wrap, note &amp; date</span>
+          </div>
+          <div class="stat">
+            <strong>Account &amp; Cart</strong>
+            <span>Log in, sign up, and manage your bag</span>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Mobile Bottom Quick Action Bar -->
+  <div class="mobile-quickbar" aria-label="Mobile quick actions">
+    <a href="#builder" class="btn btn-secondary btn-sm">Bouquet</a>
+    <button type="button" class="btn btn-secondary btn-sm" id="mobileAccountBtn">Account</button>
+    <button type="button" class="btn btn-primary btn-sm" id="mobileCartBtn">
+      Cart (<span id="mobileCartCount">0</span>)
+    </button>
+  </div>
+
+  <!-- Flower Detail Modal -->
+  <div class="modal-backdrop" id="flowerModal" aria-hidden="true">
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+      <button type="button" class="modal-close" data-close="flowerModal" aria-label="Close modal">✕</button>
+      <img id="modalImage" class="modal-img" src="" alt="" />
+      <span class="tag" id="modalTag"></span>
+      <h2 id="modalTitle"></h2>
+      <p class="latin-name" id="modalLatin"></p>
+      <p class="modal-desc" id="modalDesc"></p>
+      <div class="meta-list">
+        <div><strong>Price per Stem:</strong> <span id="modalPrice"></span></div>
+        <div><strong>Bloom Season:</strong> <span id="modalSeason"></span></div>
+        <div><strong>Sunlight:</strong> <span id="modalLight"></span></div>
+        <div><strong>Vibe &amp; Scent:</strong> <span id="modalVibe"></span></div>
+      </div>
+      <div class="modal-actions">
+        <button type="button" class="btn btn-primary" id="modalAddCartBtn">Add Stem to Cart</button>
+        <button type="button" class="btn btn-secondary" id="modalAddBouquetBtn">+ Add to Custom Bouquet</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Log In / Sign Up Modal -->
+  <div class="modal-backdrop" id="authModal" aria-hidden="true">
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="authTitle">
+      <button type="button" class="modal-close" data-close="authModal" aria-label="Close modal">✕</button>
+      <span class="tag tag-pink">Member Account</span>
+      <h2 id="authTitle">Log In or Sign Up</h2>
+      <p class="modal-desc">
+        Save your name and delivery address for faster bouquet checkout.
+      </p>
+
+      <div id="loggedInView" class="account-card" style="display: none;">
+        <p>Signed in as <strong id="activeUserName"></strong> (<span id="activeUserEmail"></span>)</p>
+        <p class="small-muted" id="activeUserAddress"></p>
+        <button type="button" class="btn btn-secondary btn-sm" id="logoutBtn">Log Out</button>
+      </div>
+
+      <div class="auth-tabs" role="tablist">
+        <button type="button" class="auth-tab active" data-tab="login">Log In</button>
+        <button type="button" class="auth-tab" data-tab="signup">Sign Up</button>
+      </div>
+
+      <form id="loginForm" class="auth-form">
+        <div class="form-row">
+          <label for="loginEmail">Email</label>
+          <input type="email" id="loginEmail" placeholder="you@example.com" required />
+        </div>
+        <div class="form-row">
+          <label for="loginPassword">Password</label>
+          <input type="password" id="loginPassword" placeholder="••••••••" required />
+        </div>
+        <div class="btn-group">
+          <button type="submit" class="btn btn-primary">Log In</button>
+          <button type="button" class="btn btn-secondary" id="demoLoginBtn">Quick Demo User</button>
+        </div>
+      </form>
+
+      <form id="signupForm" class="auth-form" style="display: none;">
+        <div class="form-row">
+          <label for="signupName">Full Name</label>
+          <input type="text" id="signupName" placeholder="Clara Meadow" required />
+        </div>
+        <div class="form-row">
+          <label for="signupEmail">Email</label>
+          <input type="email" id="signupEmail" placeholder="clara@example.com" required />
+        </div>
+        <div class="form-row">
+          <label for="signupAddress">Default Delivery Address</label>
+          <input type="text" id="signupAddress" placeholder="14 Blossom Lane" required />
+        </div>
+        <div class="form-row">
+          <label for="signupPassword">Create Password</label>
+          <input type="password" id="signupPassword" placeholder="At least 4 characters" required />
+        </div>
+        <button type="submit" class="btn btn-primary">Create Account</button>
+      </form>
+
+      <div class="form-status" id="authStatus" role="status" aria-live="polite"></div>
+    </div>
+  </div>
+
+  <!-- Cart & Delivery Checkout Modal -->
+  <div class="modal-backdrop" id="cartModal" aria-hidden="true">
+    <div class="modal modal-wide" role="dialog" aria-modal="true" aria-labelledby="cartTitle">
+      <button type="button" class="modal-close" data-close="cartModal" aria-label="Close modal">✕</button>
+      <span class="tag tag-green">Shopping Bag &amp; Delivery</span>
+      <h2 id="cartTitle">Your Flower Cart</h2>
+      <div id="cartItemsContainer" class="cart-items"></div>
+
+      <div class="cart-summary">
+        <div class="summary-line"><span>Subtotal</span><strong id="cartSubtotal">$0.00</strong></div>
+        <div class="summary-line"><span>Local Bouquet Delivery</span><strong id="cartDelivery">$5.00</strong></div>
+        <div class="summary-line total-line"><span>Total</span><strong id="cartGrandTotal">$5.00</strong></div>
+      </div>
+
+      <form id="checkoutForm" class="checkout-box">
+        <div class="form-row">
+          <label for="checkoutRecipient">Recipient Name</label>
+          <input type="text" id="checkoutRecipient" placeholder="Recipient full name" required />
+        </div>
+        <div class="form-row">
+          <label for="checkoutAddress">Delivery Address</label>
+          <input type="text" id="checkoutAddress" placeholder="Delivery street &amp; city" required />
+        </div>
+        <button type="submit" class="btn btn-primary" style="width: 100%;">Place Delivery Order</button>
+      </form>
+      <div class="form-status" id="cartStatus" role="status" aria-live="polite"></div>
+    </div>
+  </div>
+
+  <footer>
+    Petal &amp; Leaf — Online Flower Shop 
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
